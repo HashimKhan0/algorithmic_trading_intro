@@ -1,35 +1,37 @@
-# algorithmic_trading_intro
-this repo contains 3 guided projects offered by freeCodeCamp
+# Algorithmic Trading Intro
 
-## Course Overview
-## Algo Trading Basics
-    - algorithm will be making investment decisions
-    - there are many different types with the main difference being the speed of execution
-    - Big Players: Renaissance Technologies, AQR Capital Management, Citadel Securities
-    - Python is popular for algo trading but mainly used as a glue for libraries such as numpy (written in C)
-    - The Algorithmic Trading Process:
-           1. Collect Data
-           2. Develop a hypothesis for a strategy
-           3. Backtest that strategy
+Three guided projects from **freeCodeCamp's algorithmic trading course**, each building a stock screener in Python that turns market data into a buy list and exports it to Excel.
 
-## API Basics and Course Configuration
+## Projects
 
-### Project 1: Equal-Weight S&P 500 Screener
-    - an important characteristic of the S&P 500 is the market capitalization weighting
-    - larger companies have a larger weight in the index but for the project, our version will have the same weighting
-    - the benefit of greater diversification across sectors reduces the risk of downturns of large sectors or underperformance of  
-      smaller sectors
-    
-### Project 2: Quantitative Momentum Screener
-    - investing in assets that have increased in assets the most
-    - investing in company X because of its higher recent price return
+| Notebook | Strategy | What it does |
+|---|---|---|
+| `equal_weighted_sp500.ipynb` | **Equal-weight S&P 500** | The S&P 500 is market-cap weighted. This version gives every constituent the same weight, spreading risk across sectors and away from the largest names, and computes how many shares of each to buy for a given portfolio size. |
+| `quantitative_momentum.ipynb` | **Momentum screener** | Ranks stocks by one-year price return and return percentile, building toward a "high-quality momentum" (HQM) score, then sizes an equal-weight position in the top names. |
+| `quantitative_value.ipynb` | **Value screener** | Looks for stocks trading below perceived intrinsic value using valuation multiples, starting with the price-to-earnings ratio. The course's composite approach combines P/E, P/B and P/FCF, since each ratio has its own blind spots. |
 
-### Project 3: Quantitative Value Screener
-    - investing in stocks that are below their perceived intrinsic value
-    - relies on the concept of MULTIPLES
-    MULTIPLES
-        - price to earnings ratio (stock price/earnings per share)
-        - price to book value ratio (stock price/ book value per share)
-        - price to free cash flow ratio (stock price / free chas flow per share)
-    - each value has its own pros and cons
-    - to minimize this we will use a COMPOSITE
+## Algo trading basics (course notes)
+
+- An algorithm makes the investment decisions; strategies differ mainly in execution speed.
+- Major players include Renaissance Technologies, AQR and Citadel Securities.
+- Python is mostly "glue" around fast numerical libraries such as NumPy (written in C).
+- The process: **collect data → form a strategy hypothesis → backtest it.**
+
+## Running it
+
+The notebooks pull market data from the Yahoo Finance API at yfapi.net. Put your API token in a local `secret_case.py`:
+
+```python
+API_TOKEN = "your_token_here"
+```
+
+Keep that file out of version control. Then:
+
+```bash
+pip install pandas numpy requests scipy xlsxwriter
+jupyter notebook
+```
+
+## Tech stack
+
+Python · pandas · NumPy · SciPy · requests · XlsxWriter
